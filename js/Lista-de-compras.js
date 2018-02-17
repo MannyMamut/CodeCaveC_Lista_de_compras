@@ -25,31 +25,61 @@ function escribeLista(){
   if( elemento ){
     shopping.push( elemento );
   }
+  renderizaLista();
+}
 
+function renderizaLista(){
   var indice = 0;
   var indice_maximo = shopping.length;
 
-document.getElementById('lista').innerHTML = '';
+  document.getElementById('lista').innerHTML = '';
 
   //shopping.foreach(function(){})
   while( indice < indice_maximo ){
     //Escribir en la lista
-//document.getElementById('lista').innerHTML =
-//  document.getElementById('lista').innerHTML +
-//  '<li>' + shopping[ indice ] + '</li>';
+    //document.getElementById('lista').innerHTML =
+    //  document.getElementById('lista').innerHTML +
+    //  '<li>' + shopping[ indice ] + '</li>';
 
-  //$('#lista').append( '<li>' + shopping[ indice ] + '</li>' );
 
-  var li = document.createElement('li');
-var text = document.createTextNode( shopping[indice] );
-li.appendChild(text);
-document.getElementById('lista').appendChild( li );
 
+    //var li = document.createElement('li');
+    //var text = document.createTextNode( shopping[indice] );
+    //li.appendChild(text);
+    //document.getElementById('lista').appendChild( li );
+
+    $('#lista').append(
+    '<li class="list-group-item">' +
+    shopping[ indice ] +
+    '<button class="btn btn-danger btn-xsm float-right eliminar"><i class="fas fa-times-circle"></i></button>'+
+    '</li>'
+  );
 
     indice++;
   }
 
 }
 
+$(document).ready(function(){
+
+  $('#lista').delegate('button.eliminar','mouseenter',function( event ){
+    event.preventDefault();
+    //var indice = $(this).parent().index();
+    $(this).parent().addClass('resaltado');
+  });
+
+  $('#lista').delegate('button.eliminar','mouseleave',function( event ){
+    event.preventDefault();
+    //var indice = $(this).parent().index();
+    $(this).parent().removeClass('resaltado');
+  });
+
+  $('#lista').delegate('button.eliminar','mouseenter',function( event ){
+    event.preventDefault();
+    //var indice = $(this).parent().index();
+    $(this).parent().addClass('resaltado');
+  });
+
+})
 document.getElementById('agregar').addEventListener('click', escribeLista);
-escribeLista();
+renderizaLista();
