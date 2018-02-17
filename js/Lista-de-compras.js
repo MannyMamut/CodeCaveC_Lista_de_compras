@@ -62,22 +62,31 @@ function renderizaLista(){
 
 $(document).ready(function(){
 
+  $('#lista').delegate('li','mouseenter',function( event ){
+    event.preventDefault();
+    $(this).addClass('resaltado');
+  });
+
+  $('#lista').delegate('li','mouseleave',function( event ){
+    event.preventDefault();
+    $(this).removeClass('resaltado');
+  });
+
   $('#lista').delegate('button.eliminar','mouseenter',function( event ){
     event.preventDefault();
-    //var indice = $(this).parent().index();
-    $(this).parent().addClass('resaltado');
+    $(this).parent().addClass('bg-warning');
   });
 
   $('#lista').delegate('button.eliminar','mouseleave',function( event ){
     event.preventDefault();
-    //var indice = $(this).parent().index();
-    $(this).parent().removeClass('resaltado');
+    $(this).parent().removeClass('bg-warning');
   });
 
-  $('#lista').delegate('button.eliminar','mouseenter',function( event ){
+  $('#lista').delegate('button.eliminar','click',function( event ){
     event.preventDefault();
-    //var indice = $(this).parent().index();
-    $(this).parent().addClass('resaltado');
+    var indice = $(this).parent().index();
+    shopping = shopping.slice( indice, 1 );
+    renderizaLista();
   });
 
 })
